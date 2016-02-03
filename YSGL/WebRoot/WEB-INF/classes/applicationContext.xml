@@ -12,15 +12,14 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- 自动扫描 -->
-	<context:component-scan base-package="com.ysgl" />
+	<context:component-scan base-package="com.ysgl.dao" />
 
 	<!-- 引入配置文件 -->
-	<bean id="propertyConfigurer"
+ 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties" />
 	</bean>
-
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+  	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${driver}" />
 		<property name="url" value="${url}" />
@@ -30,14 +29,31 @@
 		<property name="initialSize" value="${initialSize}"></property>
 		<!-- 连接池最大数量 -->
 		<property name="maxActive" value="${maxActive}"></property>
-		<!-- 连接池最大空闲 -->
+	<!-- 	连接池最大空闲 -->
 		<property name="maxIdle" value="${maxIdle}"></property>
 		<!-- 连接池最小空闲 -->
 		<property name="minIdle" value="${minIdle}"></property>
 		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="${maxWait}"></property>
-	</bean>
-
+	</bean>  
+ 
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc\:mysql\://localhost\:3306/YSGL" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		初始化连接大小
+		<property name="initialSize" value="0"></property>
+		连接池最大数量
+		<property name="maxActive" value="20"></property>
+		连接池最大空闲
+		<property name="maxIdle" value="20"></property>
+		连接池最小空闲
+		<property name="minIdle" value="1"></property>
+		获取连接最大等待时间
+		<property name="maxWait" value="600000"></property>
+	</bean> -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
@@ -45,9 +61,9 @@
 	</bean>
 
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"  >
 		<property name="basePackage" value="com.ysgl.dao" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+		 <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> 
 	</bean>
 
 	<bean id="transactionManager"

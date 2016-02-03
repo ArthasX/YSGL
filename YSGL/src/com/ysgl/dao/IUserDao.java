@@ -8,11 +8,12 @@ import com.ysgl.pojo.User;
 @Repository
 @Transactional
 public interface IUserDao {
+	
 	public void insertUser(User user);
 
 	public void updateUser(User user);
 
-	public void deleteUser(int id);
-
-	public User findById(int id);
+	public void deleteUser(int userId);
+	
+	public User findById(int userId);
 }
