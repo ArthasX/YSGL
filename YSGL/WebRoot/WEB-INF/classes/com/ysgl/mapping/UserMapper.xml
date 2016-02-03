@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+   
+<mapper namespace="com.ysgl.dao.IUserDao">  
+    <insert id="insertUser" parameterType="com.ysgl.pojo.User" useGeneratedKeys="true" keyColumn="userid">  
+       insert into user  values(#{name}, #{account},#{pwd},#{dept})  
+    </insert>  
+     
+    <update id="updateUser" parameterType="com.ysgl.pojo.User">  
+       update  user set name=#{name} where id=#{id}  
+    </update>  
+     
+    <select id="findById" parameterType="int" resultType="com.ysgl.pojo.User">  
+       select * from  user where id=#{id}  
+    </select>  
+     
+    <delete id="deleteUser" parameterType="int">  
+       delete from  user where id=#{id}  
+    </delete>  
+</mapper>  
