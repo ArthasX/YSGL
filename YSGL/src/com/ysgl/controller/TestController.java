@@ -1,4 +1,4 @@
-package com.ysgl.test;
+package com.ysgl.controller;
 
 import javax.annotation.Resource;
 
